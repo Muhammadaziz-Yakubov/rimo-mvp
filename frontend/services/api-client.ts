@@ -19,6 +19,15 @@ apiClient.interceptors.request.use(
   (config) => {
     // Add start time to calculate duration later
     (config as any).metadata = { startTime: new Date() };
+
+    // Attach Bearer token from localStorage for cross-origin hosting environments
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("soliqly_session");
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    }
+
     return config;
   },
   (error) => {

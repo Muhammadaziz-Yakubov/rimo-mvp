@@ -93,6 +93,7 @@ export default function ConnectGovernmentPage() {
         workspace: realWorkspace,
         workspaces: [realWorkspace],
         role: res.data.role || "Admin",
+        sessionToken: res.data.sessionToken,
       });
 
       router.push("/dashboard");
@@ -143,6 +144,7 @@ export default function ConnectGovernmentPage() {
         workspace: demoWorkspace,
         workspaces: [demoWorkspace],
         role: "Admin",
+        sessionToken: res.data.sessionToken,
       });
 
       router.push("/dashboard");

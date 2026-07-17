@@ -9,7 +9,7 @@ interface AuthState {
   role: Role | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  setAuth: (payload: { user: UserMe; workspace: Workspace; workspaces: Workspace[]; role: Role }) => void;
+  setAuth: (payload: { user: UserMe; workspace: Workspace; workspaces: Workspace[]; role: Role; sessionToken?: string }) => void;
   clearAuth: () => void;
   switchWorkspace: (workspace: Workspace, role: Role) => void;
   setLoading: (isLoading: boolean) => void;
@@ -22,7 +22,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   role: null,
   isAuthenticated: false,
   isLoading: true,
-  setAuth: ({ user, workspace, workspaces, role }) =>
+  setAuth: ({ user, workspace, workspaces, role, sessionToken }) => {
+    if (sessionToken && typeof window !== "undefined") {
+      localStorage.setItem("soliqly_session", sessionToken);
+    }
     set({
       user,
       workspace,
@@ -30,8 +33,12 @@ export const useAuthStore = create<AuthState>((set) => ({
       role,
       isAuthenticated: true,
       isLoading: false,
-    }),
-  clearAuth: () =>
+    });
+  },
+  clearAuth: () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("soliqly_session");
+    }
     set({
       user: null,
       workspace: null,
@@ -39,7 +46,8 @@ export const useAuthStore = create<AuthState>((set) => ({
       role: null,
       isAuthenticated: false,
       isLoading: false,
-    }),
+    });
+  },
   switchWorkspace: (workspace, role) =>
     set({
       workspace,
