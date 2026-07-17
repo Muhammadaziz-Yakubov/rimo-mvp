@@ -13,14 +13,16 @@ import {
   Loader2, 
   Lock, 
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  HelpCircle,
+  X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { apiClient } from "@/services/api-client";
 import { useAuthStore } from "@/store/auth.store";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const loginSchema = z.object({
   username: z.string().min(3, "Foydalanuvchi nomi kamida 3 ta belgidan iborat bo'lishi kerak."),
@@ -33,6 +35,7 @@ export default function ConnectGovernmentPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showHelpModal, setShowHelpModal] = useState(false);
   const setAuth = useAuthStore((state) => state.setAuth);
 
   const {
@@ -156,10 +159,10 @@ export default function ConnectGovernmentPage() {
       <header className="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between z-10">
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-lg bg-zinc-900 dark:bg-white flex items-center justify-center text-white dark:text-black font-extrabold text-lg shadow-sm">
-            S
+            R
           </div>
           <span className="text-base font-extrabold tracking-tight text-zinc-900 dark:text-white">
-            Soliqly
+            Rimo
           </span>
         </div>
         <div className="flex items-center gap-4 text-xs font-semibold text-zinc-550 dark:text-zinc-400">
@@ -242,6 +245,14 @@ export default function ConnectGovernmentPage() {
                     <Label htmlFor="password" className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
                       Parol
                     </Label>
+                    <button
+                      type="button"
+                      onClick={() => setShowHelpModal(true)}
+                      className="text-[10px] font-semibold text-emerald-600 dark:text-[#4ade80] hover:underline flex items-center gap-1 cursor-pointer"
+                    >
+                      <HelpCircle className="w-3.5 h-3.5" />
+                      Login va parol olish
+                    </button>
                   </div>
                   <div className="relative">
                     <Input
@@ -293,7 +304,7 @@ export default function ConnectGovernmentPage() {
               <div className="flex items-start gap-2 justify-center text-[10px] text-zinc-400 dark:text-zinc-500 pt-2 px-1">
                 <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-500 shrink-0 mt-0.5" />
                 <span className="text-center leading-normal">
-                  AES-256 bilan shifrlangan. Soliqly sizning shaxsiy ma'lumotlaringizni to'liq himoya qiladi.
+                  AES-256 bilan shifrlangan. Rimo sizning shaxsiy ma'lumotlaringizni to'liq himoya qiladi.
                 </span>
               </div>
 
@@ -339,7 +350,7 @@ export default function ConnectGovernmentPage() {
       {/* Footer - Minimalist bottom area */}
       <footer className="w-full max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-zinc-400 dark:text-zinc-600 border-t border-zinc-100 dark:border-zinc-900 z-10 gap-3">
         <div>
-          <span>© {new Date().getFullYear()} Soliqly. Barcha huquqlar himoyalangan.</span>
+          <span>© {new Date().getFullYear()} Rimo. Barcha huquqlar himoyalangan.</span>
         </div>
         <div className="flex items-center gap-4">
           <a href="#" className="hover:underline">Maxfiylik kelishuvi</a>
@@ -348,6 +359,101 @@ export default function ConnectGovernmentPage() {
         </div>
       </footer>
 
+      {/* Modern Help Modal - Apple/Airbnb style */}
+      <AnimatePresence>
+        {showHelpModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowHelpModal(false)}
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            />
+
+            {/* Modal Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ type: "spring", duration: 0.4 }}
+              className="relative w-full max-w-[440px] bg-white dark:bg-zinc-900 rounded-3xl p-6 shadow-2xl border border-zinc-150 dark:border-zinc-800 z-10"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setShowHelpModal(false)}
+                className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              <div className="space-y-6">
+                {/* Header */}
+                <div className="space-y-1">
+                  <div className="h-10 w-10 rounded-full bg-emerald-55/40 dark:bg-emerald-950/45 flex items-center justify-center text-[#0B7A3B] dark:text-[#4ade80] mb-3">
+                    <HelpCircle className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-lg font-bold text-zinc-900 dark:text-white font-sans">
+                    Login va parol olish tartibi
+                  </h3>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-normal">
+                    hisobot.gov.uz portalidan integratsiya login va parolini olish uchun quyidagi bosqichlarni bajaring:
+                  </p>
+                </div>
+
+                {/* Steps */}
+                <div className="space-y-4">
+                  {[
+                    {
+                      step: "1",
+                      title: "Portalga kiring",
+                      desc: "Brauzerda hisobot.gov.uz saytiga tashrif buyuring."
+                    },
+                    {
+                      step: "2",
+                      title: "ERI bilan kiring",
+                      desc: "Tashkilotingizning (biznesingizning) ERI kaliti yordamida profilga kirish qiling."
+                    },
+                    {
+                      step: "3",
+                      title: "API hujjatlar bo'limiga o'ting",
+                      desc: "Saytning pastki qismiga tushib, 'API hujjatlar' tugmasini bosing."
+                    },
+                    {
+                      step: "4",
+                      title: "Login/parol yarating",
+                      desc: "'Login va parol yaratish' bo'limiga kiring. Tizim sizga integratsiya uchun login va parol taqdim etadi."
+                    }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-3">
+                      <div className="h-6 w-6 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-bold flex items-center justify-center shrink-0">
+                        {item.step}
+                      </div>
+                      <div className="space-y-0.5">
+                        <h4 className="text-xs font-bold text-zinc-850 dark:text-zinc-200">
+                          {item.title}
+                        </h4>
+                        <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-normal">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Confirm Button */}
+                <button
+                  onClick={() => setShowHelpModal(false)}
+                  className="w-full h-10 bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-black font-bold text-xs rounded-xl transition-colors cursor-pointer"
+                >
+                  Tushunarli
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
