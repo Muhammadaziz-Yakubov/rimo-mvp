@@ -1,0 +1,283 @@
+{
+  "common": {
+    "save": "Save",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "create": "Create",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "noData": "No data found",
+    "back": "Back",
+    "next": "Next",
+    "confirm": "Confirm",
+    "retry": "Retry",
+    "status": "Status",
+    "action": "Action",
+    "search": "Search...",
+    "sync": "Sync",
+    "refresh": "Refresh"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "organizations": "My Companies",
+    "authorities": "Authorities",
+    "reports": "Tax Reports",
+    "analytics": "Analytics",
+    "notifications": "Notifications",
+    "connections": "Connections",
+    "integrations": "Integrations",
+    "apiActivity": "API Activity",
+    "auditLogs": "Audit Logs",
+    "settings": "Settings",
+    "support": "Rimo AI",
+    "logout": "Logout",
+    "transactions": "Transactions",
+    "taxCalculator": "Tax Calculator",
+    "groups": {
+      "home": "Home",
+      "ai": "Artificial Intelligence",
+      "finance": "Finance",
+      "reports": "Reports",
+      "system": "System"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Filing statuses, company synchronization, and sent reports monitoring.",
+    "newReport": "Create new report",
+    "uptimeOperational": "Portal Integration: Active",
+    "uptimeDesc": "Connection to api.hisobot.gov.uz servers is stable. Latency ~142ms.",
+    "secureTunnel": "Secure tunnel active",
+    "diagnostic": "Diagnostic",
+    "stats": {
+      "active": "Active reports",
+      "activeDesc": "Awaiting government approval",
+      "drafts": "Draft reports",
+      "draftsDesc": "Uncompleted reports",
+      "deadlines": "Upcoming deadlines",
+      "deadlinesDesc": "Must be submitted this week",
+      "attention": "Attention required",
+      "attentionDesc": "Rejected or containing errors"
+    },
+    "recentFilings": "Recent submissions",
+    "recentFilingsDesc": "Reports synchronized from government API portal.",
+    "viewAll": "View all reports",
+    "activity": "Activity history",
+    "activityDesc": "User operations logged in the system.",
+    "emptyFilings": "No reports submitted.",
+    "emptyActivity": "System activity log is empty.",
+    "greeting": "Welcome",
+    "subtitle": "Your financial status today",
+    "importBtn": "Import data",
+    "health": {
+      "title": "AI Financial Health",
+      "excellent": "Excellent",
+      "good": "Stable",
+      "warning": "Attention required",
+      "factors": "Analysis factors"
+    },
+    "donut": {
+      "title": "Expense Breakdown",
+      "empty": "No expenses found"
+    },
+    "charts": {
+      "cashflow": "Cash Flow",
+      "income": "Income",
+      "expense": "Expense",
+      "empty": "No cash flow data available",
+      "emptySub": "No financial statements have been uploaded yet."
+    },
+    "kpis": {
+      "revenue": "Revenue",
+      "expenses": "Expenses",
+      "netProfit": "Net Profit",
+      "estimatedTax": "Estimated Tax",
+      "growth": "+{val}% growth",
+      "saved": "{val}% saved",
+      "margin": "Margin",
+      "regime": "Regime"
+    },
+    "dateRange": {
+      "all": "All periods",
+      "thisMonth": "This month",
+      "lastMonth": "Last month",
+      "thisQuarter": "This quarter"
+    }
+  },
+  "organizations": {
+    "title": "My Companies",
+    "description": "List of juridical entities and companies connected to the government integration system.",
+    "name": "Company name",
+    "tin": "TIN / STIR",
+    "userType": "Account type",
+    "status": "Connection status",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "syncing": "Syncing...",
+    "credentialUsername": "Integration user",
+    "lastSync": "Last update",
+    "empty": "No connected companies found",
+    "emptyDesc": "Check your integration credentials to log in to the api.hisobot.gov.uz system.",
+    "userTypes": {
+      "juridical": "Juridical entity",
+      "basic": "Individual",
+      "authority": "Government agency"
+    },
+    "reportAccess": "Report permissions",
+    "createReport": "Create report"
+  },
+  "authorities": {
+    "title": "Authorities",
+    "description": "List of government agencies and tax offices connected to the government API system.",
+    "name": "Agency name",
+    "tin": "TIN / STIR",
+    "category": "Category",
+    "status": "Connection status",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "syncing": "Syncing...",
+    "syncSuccess": "Agency data updated successfully",
+    "syncFailed": "Synchronization failed",
+    "empty": "No connected agencies found.",
+    "details": "Agency details",
+    "connectedAt": "Connection time",
+    "lastSync": "Last update"
+  },
+  "reports": {
+    "title": "Reports",
+    "description": "Automated tax report projects and their submission statuses.",
+    "newWizard": "New report project",
+    "wizardDescription": "Select a matching template from the government API system and start dynamic tax filing.",
+    "status": {
+      "draft": "Draft",
+      "submitted": "Submitted",
+      "processing": "Processing",
+      "rejected": "Rejected",
+      "archived": "Archived"
+    },
+    "steps": {
+      "selectAuthority": "Select organization",
+      "selectReport": "Select report type",
+      "selectPeriod": "Select period",
+      "fillForm": "Fill form details",
+      "verifySubmit": "Verify and submit"
+    },
+    "sidebar": {
+      "summary": "Calculations summary",
+      "taxableBase": "Taxable base",
+      "rate": "Tax rate",
+      "estimatedTax": "Estimated tax amount",
+      "currency": "UZS"
+    },
+    "empty": "No reports found.",
+    "submissionDetail": "Filing details",
+    "submitting": "Filing to government...",
+    "submittingDesc": "Documents are being signed with official signature and sent to the server.",
+    "submitCompleted": "Report accepted successfully!",
+    "submitFailed": "An error occurred while submitting the report"
+  },
+  "analytics": {
+    "title": "Analytics",
+    "description": "Tax payments, filing efficiency, and error diagnostics.",
+    "totalFiled": "Total filed",
+    "successRate": "Success rate",
+    "avgFilingTime": "Average filing time",
+    "savedTime": "Time saved",
+    "savedTimeDesc": "Through automation",
+    "submissionHistory": "Submission activity",
+    "noData": "Not enough data for analytics at the moment."
+  },
+  "notifications": {
+    "title": "Notifications",
+    "description": "Filing deadlines, connection status warnings, and submission alerts.",
+    "empty": "No new notifications.",
+    "markRead": "Mark as read",
+    "markAllRead": "Mark all as read"
+  },
+  "connections": {
+    "title": "Connections",
+    "description": "Security status of government integration and external APIs.",
+    "status": "Connection channel",
+    "metadata": "Token metadata",
+    "reconnect": "Reconnect",
+    "reconnectDesc": "If session has expired, restore connection.",
+    "empty": "No active integration connections."
+  },
+  "integrations": {
+    "title": "Integrations",
+    "description": "api.hisobot.gov.uz integration and data exchange synchronization logs.",
+    "syncLogs": "Sync log",
+    "jwtDetails": "JWT token details",
+    "empty": "No integrations settings found."
+  },
+  "apiActivity": {
+    "title": "API Activity",
+    "description": "Logged network requests and returned JSON responses from government API gateway.",
+    "method": "Method",
+    "endpoint": "Endpoint",
+    "statusCode": "Status",
+    "duration": "Duration",
+    "payload": "Request payload",
+    "response": "Response payload",
+    "empty": "No API requests logged."
+  },
+  "auditLogs": {
+    "title": "Audit Logs",
+    "description": "Chronological log of critical actions performed by workspace members and the system.",
+    "user": "User",
+    "action": "Action type",
+    "ip": "IP address",
+    "time": "Time",
+    "empty": "Audit log is empty."
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "User profile, security settings, and active session management.",
+    "profile": "Profile",
+    "username": "Username",
+    "role": "Role",
+    "workspace": "Workspace",
+    "workspaceName": "Workspace name",
+    "theme": "Appearance",
+    "security": "Security",
+    "activeDevices": "Active devices",
+    "terminate": "Terminate session",
+    "saveSuccess": "Settings saved successfully"
+  },
+  "support": {
+    "title": "Support",
+    "description": "Soliqly support helpdesk and integration diagnostics.",
+    "contact": "Contact us",
+    "message": "Your message",
+    "submit": "Send message",
+    "success": "Message sent successfully. We will reply shortly."
+  },
+  "taxCalculator": {
+    "title": "Tax Calculator",
+    "description": "Calculate tax obligations instantly and for free.",
+    "turnover": "Annual turnover (revenue)",
+    "rate": "Tax rate (%)",
+    "calculate": "Calculate",
+    "result": "Calculation results",
+    "taxAmount": "Tax obligation",
+    "cleanIncome": "Net profit",
+    "monthlyAvg": "Monthly average",
+    "quarterlyAvg": "Quarterly average",
+    "helperText": "Calculations are estimated based on current regulations of the Tax Code of Uzbekistan."
+  },
+  "transactions": {
+    "title": "Transactions Ledger",
+    "description": "Analyze all imported revenues and expenses with detailed filters.",
+    "exportBtn": "Export (CSV)",
+    "searchPlaceholder": "Search (description)...",
+    "allTypes": "All types",
+    "allCategories": "All categories",
+    "allTaxCategories": "All tax categories",
+    "table": {
+      "dateDesc": "Date & Description",
+      "category": "Category (AI)",
+      "taxStatus": "Tax Status",
+      "amount": "Amount"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+# Root project gitignore
+
+# Environment files (NEVER commit these)
+**/.env
+**/.env.local
+**/.env.production
+**/.env.development
+
+# Node modules
+**/node_modules/
+
+# Build outputs
+**/dist/
+**/.next/
+**/build/
+**/out/
+
+# Cache files
+**/.sessions-cache.json
+**/tsconfig.tsbuildinfo
+
+# Logs
+**/*.log
+**/npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# Test coverage
+**/coverage/
+
+# Vercel
+**/.vercel/
+
+# Screenshots / generated assets (optional - remove if you want them tracked)
+# screenshots/

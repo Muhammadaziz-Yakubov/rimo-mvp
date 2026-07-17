@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: soliqly-backend
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false   # Set in Render dashboard: your MongoDB Atlas URI
+      - key: REDIS_HOST
+        sync: false   # Set in Render dashboard: your Redis host (e.g. Upstash)
+      - key: REDIS_PORT
+        value: 6379
+      - key: REDIS_PASSWORD
+        sync: false   # Set in Render dashboard
+      - key: ENCRYPTION_KEY
+        sync: false   # Set in Render dashboard: 32+ byte random secret
+      - key: FRONTEND_URL
+        sync: false   # Set in Render dashboard: your Vercel app URL
+      - key: GROQ_API_KEY
+        sync: false   # Set in Render dashboard
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile

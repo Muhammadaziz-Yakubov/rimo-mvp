@@ -1,0 +1,283 @@
+{
+  "common": {
+    "save": "Saqlash",
+    "submit": "Yuborish",
+    "cancel": "Bekor qilish",
+    "create": "Yaratish",
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik yuz berdi",
+    "noData": "Ma'lumot topilmadi",
+    "back": "Orqaga",
+    "next": "Keyingi",
+    "confirm": "Tasdiqlash",
+    "retry": "Qayta urinish",
+    "status": "Holat",
+    "action": "Amal",
+    "search": "Qidirish...",
+    "sync": "Sinxronizatsiya qilish",
+    "refresh": "Yangilash"
+  },
+  "nav": {
+    "dashboard": "Bosh sahifa",
+    "organizations": "Korxonalarim",
+    "authorities": "Tashkilotlar",
+    "reports": "Soliq hisobotlari",
+    "analytics": "Tahlil",
+    "notifications": "Bildirishnomalar",
+    "connections": "Ulanishlar",
+    "integrations": "Integratsiyalar",
+    "apiActivity": "API faoliyati",
+    "auditLogs": "Audit jurnali",
+    "settings": "Sozlamalar",
+    "support": "Rimo AI",
+    "logout": "Chiqish",
+    "transactions": "Tranzaksiyalar",
+    "taxCalculator": "Soliq kalkulyatori",
+    "groups": {
+      "home": "Bosh oyna",
+      "ai": "Sun'iy intellekt",
+      "finance": "Moliya",
+      "reports": "Hisobotlar",
+      "system": "Tizim"
+    }
+  },
+  "dashboard": {
+    "title": "Bosh sahifa",
+    "description": "Filings holati, tashkilotlar sinxronizatsiyasi va yuborilgan hisobotlar monitoringi.",
+    "newReport": "Yangi hisobot yaratish",
+    "uptimeOperational": "Portal integratsiyasi: Faol ishlamoqda",
+    "uptimeDesc": "api.hisobot.gov.uz serverlari bilan ulanish barqaror. Kechikish ~142ms.",
+    "secureTunnel": "Xavfsiz tunnel faol",
+    "diagnostic": "Diagnostika",
+    "stats": {
+      "active": "Faol hisobotlar",
+      "activeDesc": "Hukumat tasdig'ini kutayotganlar",
+      "drafts": "Qoralama hisobotlar",
+      "draftsDesc": "Yakunlanmagan hisobotlar",
+      "deadlines": "Muddati yaqinlashayotganlar",
+      "deadlinesDesc": "Shu haftada topshirilishi lozim",
+      "attention": "Diqqat talab etiladi",
+      "attentionDesc": "Rad etilgan yoki xatoligi borlar"
+    },
+    "recentFilings": "Oxirgi yuborilgan hisobotlar",
+    "recentFilingsDesc": "Hukumat API portalidan sinxronizatsiya qilingan hisobotlar.",
+    "viewAll": "Barcha hisobotlarni ko'rish",
+    "activity": "Ish faoliyati xronologiyasi",
+    "activityDesc": "Tizimda foydalanuvchilar tomonidan bajarilgan amallar.",
+    "emptyFilings": "Yuborilgan hisobotlar mavjud emas.",
+    "emptyActivity": "Tizim faoliyati jurnali bo'sh.",
+    "greeting": "Assalomu alaykum",
+    "subtitle": "Bugungi moliyaviy holatingiz",
+    "importBtn": "Ma'lumot yuklash",
+    "health": {
+      "title": "AI Moliyaviy salomatlik",
+      "excellent": "A'lo darajada",
+      "good": "Barqaror",
+      "warning": "Soliq yoki xarajat riski",
+      "factors": "Tahliliy omillar"
+    },
+    "donut": {
+      "title": "Xarajatlar taqsimoti",
+      "empty": "Xarajat toifalari mavjud emas"
+    },
+    "charts": {
+      "cashflow": "Kirim va chiqim aylanmasi (Cash Flow)",
+      "income": "Kirim",
+      "expense": "Chiqim",
+      "empty": "Pul oqimi grafigi mavjud emas",
+      "emptySub": "Hali hech qanday moliyaviy ma'lumotlar yuklanmagan."
+    },
+    "kpis": {
+      "revenue": "Aylanma daromad",
+      "expenses": "Xarajatlar",
+      "netProfit": "Sof foyda",
+      "estimatedTax": "Baholangan soliq",
+      "growth": "+{val}% o'sish",
+      "saved": "{val}% tejaldi",
+      "margin": "Marja",
+      "regime": "Rejim"
+    },
+    "dateRange": {
+      "all": "Barcha davrlar",
+      "thisMonth": "Shu oy",
+      "lastMonth": "O'tgan oy",
+      "thisQuarter": "Shu chorak"
+    }
+  },
+  "organizations": {
+    "title": "Korxonalarim",
+    "description": "Hukumat integratsiya tizimiga ulangan yuridik shaxslar va korxonalaringiz ro'yxati.",
+    "name": "Korxona nomi",
+    "tin": "STIR / TIN",
+    "userType": "Hisob turi",
+    "status": "Ulanish holati",
+    "connected": "Ulangan",
+    "disconnected": "Ulanmagan",
+    "syncing": "Sinxronizatsiya...",
+    "credentialUsername": "Integratsiya foydalanuvchisi",
+    "lastSync": "Oxirgi yangilanish",
+    "empty": "Ulangan korxonalar topilmadi",
+    "emptyDesc": "api.hisobot.gov.uz tizimiga kirish uchun integratsiya ma'lumotlaringizni to'g'ri kiritganingizni tekshiring.",
+    "userTypes": {
+      "juridical": "Yuridik shaxs",
+      "basic": "Jismoniy shaxs",
+      "authority": "Davlat idorasi"
+    },
+    "reportAccess": "Hisobot ruxsatlari",
+    "createReport": "Hisobot yaratish"
+  },
+  "authorities": {
+    "title": "Tashkilotlar",
+    "description": "Hukumat API tizimiga ulangan davlat idoralari va soliq inspeksiyalari ro'yxati.",
+    "name": "Tashkilot nomi",
+    "tin": "STIR / TIN",
+    "category": "Kategoriya",
+    "status": "Ulanish holati",
+    "connected": "Ulangan",
+    "disconnected": "Ulanmagan",
+    "syncing": "Sinxronizatsiya qilinmoqda...",
+    "syncSuccess": "Tashkilot ma'lumotlari muvaffaqiyatli yangilandi",
+    "syncFailed": "Sinxronizatsiya muvaffaqiyatsiz tugadi",
+    "empty": "Ulangan tashkilotlar topilmadi.",
+    "details": "Tashkilot tafsilotlari",
+    "connectedAt": "Ulangan vaqti",
+    "lastSync": "Oxirgi yangilanish"
+  },
+  "reports": {
+    "title": "Hisobotlar",
+    "description": "Avtomatlashtirilgan soliq hisobotlari loyihalari va ularning yuborilish holatlari.",
+    "newWizard": "Yangi hisobot loyihasi",
+    "wizardDescription": "Hukumat API tizimidan mos keladigan shaklni tanlab, dynamic tax filing loyihasini boshlang.",
+    "status": {
+      "draft": "Qoralama",
+      "submitted": "Yuborilgan",
+      "processing": "Jarayonda",
+      "rejected": "Rad etilgan",
+      "archived": "Arxivlangan"
+    },
+    "steps": {
+      "selectAuthority": "Tashkilotni tanlang",
+      "selectReport": "Hisobot turini tanlang",
+      "selectPeriod": "Hisobot davrini tanlang",
+      "fillForm": "Ma'lumotlarni to'ldiring",
+      "verifySubmit": "Tasdiqlang va yuboring"
+    },
+    "sidebar": {
+      "summary": "Hisob-kitoblar summary",
+      "taxableBase": "Soliqqa tortiladigan baza",
+      "rate": "Soliq stavkasi",
+      "estimatedTax": "Hisoblangan soliq miqdori",
+      "currency": "so'm"
+    },
+    "empty": "Hisobotlar mavjud emas.",
+    "submissionDetail": "Hisobot yuborish tafsilotlari",
+    "submitting": "Hisobot hukumatga yuborilmoqda...",
+    "submittingDesc": "Hujjatlar rasmiy imzo bilan tasdiqlanmoqda va serverga jo'natilmoqda.",
+    "submitCompleted": "Hisobot muvaffaqiyatli qabul qilindi!",
+    "submitFailed": "Hisobotni yuborishda xatolik yuz berdi"
+  },
+  "analytics": {
+    "title": "Tahlillar",
+    "description": "Soliq to'lovlari, yuborilgan hisobotlar samaradorligi va xatolar diagnostikasi.",
+    "totalFiled": "Jami yuborilgan",
+    "successRate": "Muvaffaqiyat ko'rsatkichi",
+    "avgFilingTime": "O'rtacha topshirish vaqti",
+    "savedTime": "Tejalgan vaqt",
+    "savedTimeDesc": "Avtomatlashtirish evaziga",
+    "submissionHistory": "Hisobot topshirish dinamikasi",
+    "noData": "Hozircha tahlil qilish uchun etarli ma'lumot mavjud emas."
+  },
+  "notifications": {
+    "title": "Bildirishnomalar",
+    "description": "Soliq topshirish muddatlari, ulanishlar holati va yuborish natijalari to'g'risidagi xabarlar.",
+    "empty": "Yangi bildirishnomalar mavjud emas.",
+    "markRead": "O'qilgan deb belgilash",
+    "markAllRead": "Barchasini o'qilgan deb belgilash"
+  },
+  "connections": {
+    "title": "Ulanishlar",
+    "description": "Hukumat integratsiyasi va tashqi API ulanishlarining xavfsiz holati.",
+    "status": "Ulanish kanali",
+    "metadata": "Token metama'lumotlari",
+    "reconnect": "Qayta ulanish",
+    "reconnectDesc": "Agar sessiya muddati tugagan bo'lsa, integratsiyani qayta tiklang.",
+    "empty": "Faol integratsiya ulanishlari mavjud emas."
+  },
+  "integrations": {
+    "title": "Integratsiyalar",
+    "description": "api.hisobot.gov.uz integratsiyasi va ma'lumotlar almashinuvi sinxronizatsiyasi.",
+    "syncLogs": "Sinxronizatsiya jurnali",
+    "jwtDetails": "JWT token tafsilotlari",
+    "empty": "Integratsiya sozlamalari mavjud emas."
+  },
+  "apiActivity": {
+    "title": "API faoliyati",
+    "description": "Hukumat API shlyuzi bilan amalga oshirilgan barcha tarmoq so'rovlari va qaytgan JSON javoblar jurnali.",
+    "method": "Metod",
+    "endpoint": "Endpoint",
+    "statusCode": "Status",
+    "duration": "Davomiyligi",
+    "payload": "So'rov payload",
+    "response": "Javob payload",
+    "empty": "API faoliyatiga doir so'rovlar topilmadi."
+  },
+  "auditLogs": {
+    "title": "Audit jurnali",
+    "description": "Tashkilot a'zolari va tizim tomonidan amalga oshirilgan muhim amallarning xronologik tarixi.",
+    "user": "Foydalanuvchi",
+    "action": "Amal turi",
+    "ip": "IP manzil",
+    "time": "Vaqt",
+    "empty": "Audit jurnali bo'sh."
+  },
+  "settings": {
+    "title": "Sozlamalar",
+    "description": "Foydalanuvchi profili, xavfsizlik sozlamalari va faol sessiyalarni boshqarish.",
+    "profile": "Profil",
+    "username": "Foydalanuvchi nomi",
+    "role": "Lavozim",
+    "workspace": "Ish maydoni",
+    "workspaceName": "Ish maydoni nomi",
+    "theme": "Ko'rinish",
+    "security": "Xavfsizlik",
+    "activeDevices": "Faol qurilmalar",
+    "terminate": "Sessiyani yakunlash",
+    "saveSuccess": "Sozlamalar muvaffaqiyatli saqlandi"
+  },
+  "support": {
+    "title": "Yordam",
+    "description": "Soliqly yordam ko'rsatish markazi va integratsiya diagnostikasi xizmati.",
+    "contact": "Biz bilan bog'lanish",
+    "message": "Sizning xabaringiz",
+    "submit": "Xabarni yuborish",
+    "success": "Xabaramiz muvaffaqiyatli yuborildi. Tez orada javob qaytaramiz."
+  },
+  "taxCalculator": {
+    "title": "Soliq kalkulyatori",
+    "description": "Soliq to'lovlarini tezkorlik bilan va bepul hisoblang.",
+    "turnover": "Yillik aylanma (tushum)",
+    "rate": "Soliq stavkasi (%)",
+    "calculate": "Hisoblash",
+    "result": "Hisob-kitob natijalari",
+    "taxAmount": "To'lanishi kerak bo'lgan soliq",
+    "cleanIncome": "Netto daromad (foyda)",
+    "monthlyAvg": "O'rtacha oylik soliq",
+    "quarterlyAvg": "Choraklik soliq",
+    "helperText": "Ushbu hisob-kitoblar O'zbekiston Respublikasi Soliq Kodeksining joriy normalari asosida taxminiy hisoblangan."
+  },
+  "transactions": {
+    "title": "Tranzaksiyalar jurnali (Ledger)",
+    "description": "Import qilingan barcha aylanma va xarajatlarni batafsil filtrlar bilan tahlil qiling.",
+    "exportBtn": "Eksport qilish (CSV)",
+    "searchPlaceholder": "Qidiruv (izoh)...",
+    "allTypes": "Barcha turlar",
+    "allCategories": "Barcha kategoriyalar",
+    "allTaxCategories": "Barcha soliq toifalari",
+    "table": {
+      "dateDesc": "Sana va izoh",
+      "category": "Kategoriya (AI)",
+      "taxStatus": "Soliq holati",
+      "amount": "Summa"
+    }
+  }
+}
