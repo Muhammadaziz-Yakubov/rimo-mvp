@@ -328,12 +328,12 @@ export class AuthService {
 
     const demoSessionData = {
       user: {
-        id: "demo-user-id-000000000000",
+        id: "65df3e481b7a2d3e4b789012",
         pin: "00000000000000",
         fullname: "Demo Foydalanuvchi",
         username: "demo_user",
       },
-      workspaceId: "demo-workspace-id-0000000",
+      workspaceId: "65df3e481b7a2d3e4b789013",
       role: "Admin",
       govAccessToken: "demo-token",
       govRefreshToken: "demo-refresh-token",
