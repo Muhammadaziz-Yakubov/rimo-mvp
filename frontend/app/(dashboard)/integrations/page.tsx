@@ -101,7 +101,7 @@ export default function IntegrationsPage() {
             <Link2 className="h-5 w-5 text-[#0B7A3B] shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
-                Soliqly faqat rasmiy integratsiyalardan foydalanadi
+                Rimo faqat rasmiy integratsiyalardan foydalanadi
               </p>
               <p className="text-xs text-zinc-500 mt-1 leading-relaxed">
                 Barcha ma'lumot almashinuvi O'zbekiston davlat soliq qo'mitasining rasmiy API manzillari orqali amalga oshiriladi.

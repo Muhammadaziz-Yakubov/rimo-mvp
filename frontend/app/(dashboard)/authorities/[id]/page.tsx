@@ -273,7 +273,7 @@ export default function AuthorityDetailPage() {
                   <div>
                     <CardTitle className="text-sm font-bold">Integration Credentials State</CardTitle>
                     <CardDescription className="text-xs">
-                      Soliqly manages credentials automatically via background token rotations.
+                      Rimo manages credentials automatically via background token rotations.
                     </CardDescription>
                   </div>
                 </div>

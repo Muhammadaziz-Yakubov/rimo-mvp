@@ -184,7 +184,7 @@ export default function SubmissionProgressPage() {
           >
             {/* Header branding */}
             <div className="space-y-1">
-              <span className="text-sm font-bold text-[#2563eb] uppercase tracking-widest">Soliqly</span>
+              <span className="text-sm font-bold text-[#2563eb] uppercase tracking-widest">Rimo</span>
               <p className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Tax Automation System</p>
             </div>
 

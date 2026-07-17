@@ -168,7 +168,7 @@ export default function ConnectGovernmentPage() {
         <div className="flex items-center gap-4 text-xs font-semibold text-zinc-550 dark:text-zinc-400">
           <span>O'zbekcha</span>
           <span className="h-3 w-[1px] bg-zinc-200 dark:bg-zinc-800" />
-          <a href="https://t.me/soliqly_support" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
+          <a href="https://t.me/rimo_support" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
             Yordam
           </a>
         </div>
