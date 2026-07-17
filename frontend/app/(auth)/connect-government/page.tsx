@@ -27,6 +27,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const loginSchema = z.object({
   username: z.string().min(3, "Foydalanuvchi nomi kamida 3 ta belgidan iborat bo'lishi kerak."),
   password: z.string().min(6, "Parol kamida 6 ta belgidan iborat bo'lishi kerak."),
+  agreeToTerms: z.boolean().refine(val => val === true, "Davom etish uchun shartlarga rozilik berishingiz kerak."),
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -36,6 +37,8 @@ export default function ConnectGovernmentPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const setAuth = useAuthStore((state) => state.setAuth);
 
   const {
@@ -47,6 +50,7 @@ export default function ConnectGovernmentPage() {
     defaultValues: {
       username: "",
       password: "",
+      agreeToTerms: false,
     },
   });
 
@@ -283,6 +287,45 @@ export default function ConnectGovernmentPage() {
                   )}
                 </div>
 
+                {/* Terms and conditions checkbox */}
+                <div className="space-y-1 py-1">
+                  <div className="flex items-start gap-2.5">
+                    <input
+                      id="agreeToTerms"
+                      type="checkbox"
+                      {...register("agreeToTerms")}
+                      className="h-4 w-4 rounded border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white accent-[#0B7A3B] focus:ring-zinc-900 dark:focus:ring-white mt-0.5 cursor-pointer"
+                    />
+                    <label
+                      htmlFor="agreeToTerms"
+                      className="text-xs text-zinc-500 dark:text-zinc-400 leading-normal cursor-pointer select-none"
+                    >
+                      Men Rimo{" "}
+                      <button
+                        type="button"
+                        onClick={() => setShowTermsModal(true)}
+                        className="text-zinc-900 dark:text-white underline font-semibold hover:text-emerald-600 dark:hover:text-[#4ade80] cursor-pointer"
+                      >
+                        Foydalanish shartlari
+                      </button>{" "}
+                      va{" "}
+                      <button
+                        type="button"
+                        onClick={() => setShowPrivacyModal(true)}
+                        className="text-zinc-900 dark:text-white underline font-semibold hover:text-emerald-600 dark:hover:text-[#4ade80] cursor-pointer"
+                      >
+                        Maxfiylik siyosati
+                      </button>{" "}
+                      ga rozilik bildiraman.
+                    </label>
+                  </div>
+                  {errors.agreeToTerms && (
+                    <p className="text-[11px] font-semibold text-red-650 dark:text-red-400 mt-1">
+                      {errors.agreeToTerms.message}
+                    </p>
+                  )}
+                </div>
+
                 {/* Main Submit Button - Black Apple-Style High Contrast */}
                 <Button
                   type="submit"
@@ -445,6 +488,154 @@ export default function ConnectGovernmentPage() {
                 {/* Confirm Button */}
                 <button
                   onClick={() => setShowHelpModal(false)}
+                  className="w-full h-10 bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-black font-bold text-xs rounded-xl transition-colors cursor-pointer"
+                >
+                  Tushunarli
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Terms of Use Modal */}
+      <AnimatePresence>
+        {showTermsModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowTermsModal(false)}
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ type: "spring", duration: 0.4 }}
+              className="relative w-full max-w-[480px] bg-white dark:bg-zinc-900 rounded-3xl p-6 shadow-2xl border border-zinc-150 dark:border-zinc-800 z-10 max-h-[85vh] overflow-y-auto"
+            >
+              <button
+                onClick={() => setShowTermsModal(false)}
+                className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              <div className="space-y-6">
+                <div className="space-y-1">
+                  <h3 className="text-lg font-bold text-zinc-900 dark:text-white font-sans">
+                    Foydalanish shartlari
+                  </h3>
+                  <p className="text-[11px] text-zinc-400 dark:text-zinc-500">
+                    Oxirgi yangilanish: 18-Iyul, 2026-yil
+                  </p>
+                </div>
+
+                <div className="space-y-4 text-xs text-zinc-650 dark:text-zinc-350 leading-relaxed font-sans">
+                  <p>
+                    Rimo platformasiga xush kelibsiz. Ushbu xizmatdan foydalanish orqali siz quyidagi shartlarga to'liq rozilik bildirasiz:
+                  </p>
+                  
+                  <div className="space-y-2">
+                    <h4 className="font-bold text-zinc-850 dark:text-zinc-200">1. Xizmat maqsadi</h4>
+                    <p>
+                      Rimo – bu tadbirkorlar va korxonalar uchun soliq hisob-kitoblarini avtomatlashtirish, tranzaksiyalarni AI yordamida tasniflash va deklaratsiyalarni tayyorlashda ko'maklashuvchi analitik yordamchi vositadir.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-bold text-zinc-850 dark:text-zinc-200">2. Ma'lumotlar aniqligi va javobgarlik</h4>
+                    <p>
+                      Tizim tomonidan taqdim etiladigan hisob-kitoblar va AI maslahatlari faqat ma'lumot olish maqsadida bo'lib, rasmiy yuridik yoki audit xulosasi hisoblanmaydi. Soliq deklaratsiyalarining to'g'riligi va davlat organlariga topshirilishi uchun yakuniy javobgarlik foydalanuvchining zimmasida qoladi.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-bold text-zinc-850 dark:text-zinc-200">3. Integratsiya va ERI kalitlari</h4>
+                    <p>
+                      Xizmat hisobot.gov.uz davlat portali bilan integratsiya orqali ishlaydi. Foydalanuvchi o'ziga tegishli integratsiya hisob ma'lumotlarini taqdim etish orqali Rimo xizmatiga ulanadi va barcha harakatlar qonuniy va vakolatli shaxs tomonidan bajarilayotganini kafolatlaydi.
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setShowTermsModal(false)}
+                  className="w-full h-10 bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-black font-bold text-xs rounded-xl transition-colors cursor-pointer"
+                >
+                  Tushunarli
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Privacy Policy Modal */}
+      <AnimatePresence>
+        {showPrivacyModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowPrivacyModal(false)}
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ type: "spring", duration: 0.4 }}
+              className="relative w-full max-w-[480px] bg-white dark:bg-zinc-900 rounded-3xl p-6 shadow-2xl border border-zinc-150 dark:border-zinc-800 z-10 max-h-[85vh] overflow-y-auto"
+            >
+              <button
+                onClick={() => setShowPrivacyModal(false)}
+                className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              <div className="space-y-6">
+                <div className="space-y-1">
+                  <h3 className="text-lg font-bold text-zinc-900 dark:text-white font-sans">
+                    Maxfiylik siyosati
+                  </h3>
+                  <p className="text-[11px] text-zinc-400 dark:text-zinc-500">
+                    Oxirgi yangilanish: 18-Iyul, 2026-yil
+                  </p>
+                </div>
+
+                <div className="space-y-4 text-xs text-zinc-650 dark:text-zinc-350 leading-relaxed font-sans">
+                  <p>
+                    Rimo xizmati sizning maxfiyligingiz va xavfsizligingizni birinchi o'ringa qo'yadi. Ma'lumotlaringiz qanday himoya qilinishi haqida quyida tanishing:
+                  </p>
+
+                  <div className="space-y-2">
+                    <h4 className="font-bold text-zinc-850 dark:text-zinc-200">1. Shifrlangan saqlash</h4>
+                    <p>
+                      Davlat portali integratsiyasi uchun kiritilgan login va parollar ma'lumotlar bazasida saqlanmasdan oldin AES-256 shifrlash kaliti yordamida shifrlanadi. Ushbu kalitlarga hech kim, jumladan Rimo jamoasi ham kirish huquqiga ega emas.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-bold text-zinc-850 dark:text-zinc-200">2. Ma'lumotlarni uzatmaslik</h4>
+                    <p>
+                      Sizning moliyaviy ma'lumotlaringiz, tranzaksiyalar, hisobotlar va shaxsiy parametrlaringiz hech qachon uchinchi tomon kompaniyalariga yoki reklama beruvchilarga sotilmaydi va ulashilmaydi.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-bold text-zinc-850 dark:text-zinc-200">3. Sessiya nazorati</h4>
+                    <p>
+                      Faol sessiyangiz faqat shaxsiy brauzeringiz va xavfsiz Redis keshlash tizimida saqlanadi. Sessiyani xohlagan paytda sozlamalar bo'limidan yoki tizimdan chiqish orqali to'liq yakunlashingiz mumkin.
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setShowPrivacyModal(false)}
                   className="w-full h-10 bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-black font-bold text-xs rounded-xl transition-colors cursor-pointer"
                 >
                   Tushunarli
