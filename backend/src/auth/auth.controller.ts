@@ -51,6 +51,7 @@ export class AuthController {
       user: result.user,
       workspace: result.workspace,
       role: result.role,
+      sessionToken: result.sessionToken,
     };
   }
 
@@ -75,6 +76,7 @@ export class AuthController {
       user: result.user,
       workspace: result.workspace,
       role: result.role,
+      sessionToken: result.sessionToken,
     };
   }
 
