@@ -447,49 +447,80 @@ export class FinancialsService implements OnModuleInit {
     let healthScore = 100;
     const healthBreakdown: string[] = [];
 
-    // Profit margin check
-    if (netProfit < 0) {
-      healthScore -= 30;
-      healthBreakdown.push("Zarar ko'rilmoqda (-30 ball)");
-    } else if (profitMargin < 15) {
-      healthScore -= 10;
-      healthBreakdown.push("Rentabellik past, 15% dan kam (-10 ball)");
-    } else {
-      healthBreakdown.push("Rentabellik darajasi barqaror");
-    }
-
-    // Expense check
-    const expenseToRev = revenue > 0 ? (expenses / revenue) * 100 : 0;
-    if (expenseToRev > 80) {
-      healthScore -= 20;
-      healthBreakdown.push("Xarajatlar aylanmaning 80% dan yuqori (-20 ball)");
-    } else if (expenseToRev > 50) {
-      healthScore -= 10;
-      healthBreakdown.push("Xarajatlar darajasi o'rtacha (-10 ball)");
-    } else {
-      healthBreakdown.push("Xarajatlar oqilona boshqarilmoqda");
-    }
-
-    // Tax load safety check
-    const taxToRev = revenue > 0 ? (totalEstimatedTax / revenue) * 100 : 0;
-    if (taxToRev > 25) {
+    // Indicator 1: Profitability (Rentabellik)
+    if (revenue === 0 && expenses === 0) {
       healthScore -= 15;
-      healthBreakdown.push("Soliq yuki aylanmaga nisbatan juda yuqori, 25% dan ko'p (-15 ball)");
+      healthBreakdown.push("Tranzaksiyalar mavjud emas, hisob-kitoblar kutilmoqda (-15 ball)");
+    } else if (netProfit < 0) {
+      healthScore -= 30;
+      healthBreakdown.push("Kompaniya zarar ko'rmoqda, xarajatlarni optimallashtiring (-30 ball)");
+    } else if (profitMargin < 12) {
+      healthScore -= 10;
+      healthBreakdown.push(`Rentabellik darajasi past (${profitMargin.toFixed(1)}%), me'yor 15%+ (-10 ball)`);
     } else {
-      healthBreakdown.push("Soliq yuki me'yorda");
+      healthBreakdown.push("Rentabellik darajasi barqaror va yuqori");
     }
 
-    // Low confidence transaction audit review check
+    // Indicator 2: Cost-to-Income Control (Xarajatlar nazorati)
+    const expenseToRev = revenue > 0 ? (expenses / revenue) * 100 : 0;
+    if (revenue > 0) {
+      if (expenseToRev > 85) {
+        healthScore -= 20;
+        healthBreakdown.push("Xarajatlar aylanmaning 85% dan yuqori, kritik holat (-20 ball)");
+      } else if (expenseToRev > 65) {
+        healthScore -= 10;
+        healthBreakdown.push("Xarajatlar salmog'i balandroq (65%-85%), xavf ostida (-10 ball)");
+      } else {
+        healthBreakdown.push("Xarajatlar darajasi oqilona boshqarilmoqda");
+      }
+    }
+
+    // Indicator 3: 1B UZS Tax Regime Threshold Alert (Soliq rejimi bo'sag'asi)
+    // In Uzbekistan, if annual turnover is close to 1 billion UZS, company must switch from Turnover Tax (4%) to general VAT (12%) and Profit tax (15%).
+    if (revenue > 800000000 && revenue <= 1000000000) {
+      healthScore -= 8;
+      healthBreakdown.push("Aylanma 1 mlrd so'mga yaqinlashmoqda, QQS rejimiga tayyorlaning (-8 ball)");
+    } else if (revenue > 1000000000 && activeRegime === "turnover") {
+      healthScore -= 15;
+      healthBreakdown.push("Kritik: Aylanma 1 mlrd so'mdan oshdi, zudlik bilan umumiy soliq rejimiga o'ting (-15 ball)");
+    }
+
+    // Indicator 4: Non-Deductible Expense Risk (Chegirilmaydigan xarajatlar yuki)
+    // Non-deductible expenses (e.g. without corporate cards or proper invoices) don't reduce taxable profits.
+    const nonDeductibleCount = transactions.filter(t => t.taxCategory === "non_deductible_expense").length;
+    if (nonDeductibleCount > 0) {
+      const nonDeductibleTotal = transactions
+        .filter(t => t.taxCategory === "non_deductible_expense")
+        .reduce((sum, t) => sum + (t.amount || 0), 0);
+      const nonDeductiblePercent = expenses > 0 ? (nonDeductibleTotal / expenses) * 100 : 0;
+      
+      if (nonDeductiblePercent > 15) {
+        healthScore -= 12;
+        healthBreakdown.push(`Chegirilmaydigan xarajatlar yuki juda yuqori (${nonDeductiblePercent.toFixed(1)}%) (-12 ball)`);
+      } else if (nonDeductiblePercent > 5) {
+        healthScore -= 5;
+        healthBreakdown.push(`Xarajat hujjatlarida kamchiliklar bor (${nonDeductiblePercent.toFixed(1)}% chegirilmaydi) (-5 ball)`);
+      }
+    }
+
+    // Indicator 5: Operating Cash Flow Stability (Pul oqimlari barqarorligi)
+    const negativeCashFlowMonths = monthlyHistory.filter(m => (m.income > 0 || m.expense > 0) && (m.income - m.expense < 0)).length;
+    if (negativeCashFlowMonths > 2) {
+      healthScore -= 10;
+      healthBreakdown.push(`Muntazam operatsion kamomad: ${negativeCashFlowMonths} ta oy salbiy balansda (-10 ball)`);
+    }
+
+    // Indicator 6: AI Audit Findings & Low Confidence Classifications (Tasniflash ishonchliligi)
     const lowConfidenceCount = transactions.filter(t => t.confidenceScore !== undefined && t.confidenceScore < 70).length;
     if (lowConfidenceCount > 0) {
       healthScore -= 10;
-      healthBreakdown.push(`Noma'lum/shubhali tranzaksiyalar mavjud: ${lowConfidenceCount} ta (-10 ball)`);
+      healthBreakdown.push(`Noma'lum yoki shubhali tranzaksiyalar mavjud: ${lowConfidenceCount} ta (-10 ball)`);
     }
 
     healthScore = Math.max(10, Math.min(100, healthScore));
     let healthStatus = "Good";
-    if (healthScore >= 85) healthStatus = "Excellent";
-    else if (healthScore < 60) healthStatus = "Warning";
+    if (healthScore >= 88) healthStatus = "Excellent";
+    else if (healthScore < 65) healthStatus = "Warning";
 
     // 6. Fetch insights from database
     let insights = await this.financialInsightModel
