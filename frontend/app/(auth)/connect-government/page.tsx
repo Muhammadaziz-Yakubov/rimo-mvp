@@ -16,8 +16,7 @@ import {
   CheckCircle2, 
   Sparkles, 
   TrendingUp, 
-  Building2, 
-  HelpCircle 
+  Building2 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
@@ -153,18 +152,17 @@ export default function ConnectGovernmentPage() {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col lg:flex-row bg-[#080b11] text-slate-100 overflow-x-hidden">
+    <div className="w-full min-h-screen flex flex-col lg:flex-row bg-slate-50 dark:bg-[#0b0f19] text-slate-800 dark:text-slate-100 overflow-x-hidden transition-colors duration-200">
       
-      {/* LEFT SIDE: Brand presentation & Floating Mock Card Graphics */}
-      <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-to-br from-slate-950 via-slate-900 to-[#0B7A3B]/40 items-center justify-center p-12 overflow-hidden border-r border-slate-800/60">
+      {/* LEFT SIDE: Clean Light Brand Presentation & Graphics */}
+      <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-to-br from-slate-100 via-white to-emerald-50 dark:from-slate-950 dark:via-slate-900 dark:to-[#0B7A3B]/20 items-center justify-center p-12 overflow-hidden border-r border-slate-200 dark:border-slate-800/60">
         
-        {/* Abstract Glow Effects */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-[#0B7A3B]/10 blur-[120px] pointer-events-none" />
+        {/* Glow Effects */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-[#0B7A3B]/5 dark:bg-[#0B7A3B]/10 blur-[120px] pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-blue-500/5 blur-[150px] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.08),rgba(255,255,255,0))]" />
 
-        {/* Dynamic Grid Background Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-35" />
+        {/* Subtle Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-40 dark:opacity-20" />
 
         <div className="relative z-10 max-w-lg space-y-12">
           
@@ -174,7 +172,7 @@ export default function ConnectGovernmentPage() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#0B7A3B]/30 bg-[#0B7A3B]/10 text-[#4ade80] text-xs font-semibold tracking-wide"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-200 dark:border-[#0B7A3B]/30 bg-emerald-50 dark:bg-[#0B7A3B]/10 text-[#0B7A3B] dark:text-[#4ade80] text-xs font-semibold tracking-wide"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>Avtomatlashtirilgan Tizim v1.2</span>
@@ -184,7 +182,7 @@ export default function ConnectGovernmentPage() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl lg:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent leading-none"
+              className="text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-none"
             >
               Soliq hisobotlari endi osonroq
             </motion.h1>
@@ -193,7 +191,7 @@ export default function ConnectGovernmentPage() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-slate-400 text-base leading-relaxed"
+              className="text-slate-500 dark:text-slate-400 text-base leading-relaxed"
             >
               Hukumat portalining integratsiyalari bilan ish vaqtingizni tejang va barcha jarayonlarni sun'iy intellekt yordamida to'liq avtomatlashtiring.
             </motion.p>
@@ -207,57 +205,57 @@ export default function ConnectGovernmentPage() {
             className="relative"
           >
             {/* Main Interactive Mock Card */}
-            <div className="relative rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-2xl backdrop-blur-md">
+            <div className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 p-6 shadow-xl dark:shadow-2xl backdrop-blur-md">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#0B7A3B]/20 flex items-center justify-center border border-[#0B7A3B]/30">
-                    <Building2 className="w-4 h-4 text-[#4ade80]" />
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-[#0B7A3B]/20 flex items-center justify-center border border-emerald-100 dark:border-[#0B7A3B]/30">
+                    <Building2 className="w-4 h-4 text-[#0B7A3B] dark:text-[#4ade80]" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-white">Soliqly AI Dashboard</h4>
-                    <p className="text-[10px] text-slate-500 font-medium">Barcha hisobotlar faol holatda</p>
+                    <h4 className="text-xs font-bold text-slate-900 dark:text-white">Soliqly AI Dashboard</h4>
+                    <p className="text-[10px] text-slate-400 font-medium">Barcha hisobotlar faol holatda</p>
                   </div>
                 </div>
-                <div className="h-2 w-2 rounded-full bg-[#4ade80] animate-pulse" />
+                <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
               </div>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <span className="text-[9px] text-slate-500 uppercase font-semibold tracking-wider">Soliq Sog'lomligi</span>
+                    <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase font-semibold tracking-wider">Soliq Sog'lomligi</span>
                     <div className="flex items-center gap-1.5">
-                      <span className="text-lg font-black text-white">98%</span>
-                      <span className="text-[9px] text-[#4ade80] font-bold flex items-center bg-[#4ade80]/10 px-1 py-0.5 rounded">A'lo</span>
+                      <span className="text-lg font-black text-slate-900 dark:text-white">98%</span>
+                      <span className="text-[9px] text-[#0B7A3B] dark:text-[#4ade80] font-bold flex items-center bg-emerald-50 dark:bg-[#4ade80]/10 px-1.5 py-0.5 rounded">A'lo</span>
                     </div>
                   </div>
                   <div className="space-y-1">
-                    <span className="text-[9px] text-slate-500 uppercase font-semibold tracking-wider">Tejalgan Soliqlar</span>
-                    <div className="flex items-center gap-1 text-emerald-500 font-bold">
+                    <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase font-semibold tracking-wider">Tejalgan Soliqlar</span>
+                    <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-500 font-bold">
                       <TrendingUp className="w-3.5 h-3.5" />
                       <span className="text-sm font-black">+14.2M UZS</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="h-[2px] bg-slate-800" />
+                <div className="h-[1px] bg-slate-100 dark:bg-slate-800" />
 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-[10px]">
-                    <span className="text-slate-400 font-medium">Deklaratsiyalar holati</span>
-                    <span className="text-[#4ade80] font-bold">Jo'natildi (100%)</span>
+                    <span className="text-slate-500 dark:text-slate-400 font-medium">Deklaratsiyalar holati</span>
+                    <span className="text-emerald-600 dark:text-[#4ade80] font-bold">Jo'natildi (100%)</span>
                   </div>
-                  <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                  <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-[#0B7A3B] to-[#4ade80] rounded-full w-full" />
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Glowing Secondary Accent Card */}
-            <div className="absolute -bottom-8 -right-6 rounded-xl border border-slate-800 bg-slate-950/70 p-4 shadow-xl backdrop-blur-md hidden xl:block w-52 transform rotate-2 hover:rotate-0 transition-transform duration-300">
+            {/* Accent trust notification */}
+            <div className="absolute -bottom-8 -right-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/70 p-4 shadow-lg backdrop-blur-md hidden xl:block w-52 transform rotate-2 hover:rotate-0 transition-transform duration-300">
               <div className="flex items-center gap-2 mb-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                <span className="text-[10px] font-bold text-white">Xavfsizlik Kafolatlangan</span>
+                <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-500" />
+                <span className="text-[10px] font-bold text-slate-900 dark:text-white font-sans">Xavfsizlik Kafolati</span>
               </div>
               <p className="text-[9px] text-slate-500 leading-normal">
                 Barcha integratsiya ma'lumotlaringiz davlat standartlari asosida shifrlanadi.
@@ -270,22 +268,22 @@ export default function ConnectGovernmentPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="grid grid-cols-2 gap-4 text-xs font-medium text-slate-400"
+            className="grid grid-cols-2 gap-4 text-xs font-semibold text-slate-500 dark:text-slate-400"
           >
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#4ade80] shrink-0" />
+              <CheckCircle2 className="w-4 h-4 text-[#0B7A3B] dark:text-[#4ade80] shrink-0" />
               <span>E-imzo & Hisob-kitoblar</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#4ade80] shrink-0" />
+              <CheckCircle2 className="w-4 h-4 text-[#0B7A3B] dark:text-[#4ade80] shrink-0" />
               <span>Avtomatik QQS hisoboti</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#4ade80] shrink-0" />
-              <span>Kamera nazorati optimallash</span>
+              <CheckCircle2 className="w-4 h-4 text-[#0B7A3B] dark:text-[#4ade80] shrink-0" />
+              <span>Kamera nazorati tahlili</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#4ade80] shrink-0" />
+              <CheckCircle2 className="w-4 h-4 text-[#0B7A3B] dark:text-[#4ade80] shrink-0" />
               <span>24/7 AI yordamchi</span>
             </div>
           </motion.div>
@@ -293,21 +291,21 @@ export default function ConnectGovernmentPage() {
         </div>
       </div>
 
-      {/* RIGHT SIDE: Perfect Modern Login Form Container */}
+      {/* RIGHT SIDE: Light Form Container */}
       <div className="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 relative min-h-screen">
         
-        {/* Glow Effects on Mobile */}
-        <div className="lg:hidden absolute top-1/4 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full bg-[#0B7A3B]/10 blur-[100px] pointer-events-none" />
+        {/* Glow effect on mobile */}
+        <div className="lg:hidden absolute top-1/4 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full bg-[#0B7A3B]/5 blur-[100px] pointer-events-none" />
 
         <div className="w-full max-w-[420px] space-y-8 z-10">
           
-          {/* Header Mobile Logo / Branding */}
+          {/* Header Mobile Logo */}
           <div className="flex flex-col items-center justify-center text-center">
             <motion.div 
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.4 }}
-              className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0B7A3B] to-[#4ade80] text-white font-extrabold text-3xl shadow-lg mb-4 border border-[#4ade80]/20"
+              className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0B7A3B] text-white font-extrabold text-3xl shadow-md mb-4"
             >
               S
             </motion.div>
@@ -315,7 +313,7 @@ export default function ConnectGovernmentPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="text-2xl font-black tracking-tight text-white"
+              className="text-2xl font-black tracking-tight text-slate-900 dark:text-white"
             >
               Soliqly
             </motion.h2>
@@ -323,7 +321,7 @@ export default function ConnectGovernmentPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="text-xs text-slate-500 uppercase tracking-widest font-bold mt-1.5"
+              className="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-widest font-extrabold mt-1.5"
             >
               Soliq Avtomatlashtirish Tizimi
             </motion.p>
@@ -334,14 +332,14 @@ export default function ConnectGovernmentPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            {/* Elegant Main Form Card */}
-            <Card className="border-slate-800/80 bg-slate-900/40 shadow-2xl backdrop-blur-xl rounded-2xl overflow-hidden">
+            {/* Elegant Light Card */}
+            <Card className="border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 shadow-xl dark:shadow-2xl rounded-2xl overflow-hidden">
               <CardHeader className="space-y-2 pb-6">
-                <CardTitle className="text-xl font-extrabold text-white text-center flex items-center justify-center gap-2">
-                  <Lock className="w-4 h-4 text-[#4ade80]" />
+                <CardTitle className="text-xl font-extrabold text-slate-900 dark:text-white text-center flex items-center justify-center gap-2">
+                  <Lock className="w-4 h-4 text-[#0B7A3B] dark:text-[#4ade80]" />
                   Hukumat hisobiga ulaning
                 </CardTitle>
-                <CardDescription className="text-center text-xs text-slate-400 px-4 leading-normal">
+                <CardDescription className="text-center text-xs text-slate-500 dark:text-slate-400 px-4 leading-normal">
                   Soliq hisobotlarini yuklash va yangilash uchun integratsiya login ma'lumotlarini kiriting.
                 </CardDescription>
               </CardHeader>
@@ -350,7 +348,7 @@ export default function ConnectGovernmentPage() {
                   
                   {/* Username Input Field */}
                   <div className="space-y-1.5">
-                    <Label htmlFor="username" className="text-xs font-bold text-slate-300">
+                    <Label htmlFor="username" className="text-xs font-bold text-slate-700 dark:text-slate-300">
                       Integratsiya foydalanuvchi nomi
                     </Label>
                     <div className="relative">
@@ -359,7 +357,7 @@ export default function ConnectGovernmentPage() {
                         type="text"
                         placeholder="Masalan: basic_username"
                         {...register("username")}
-                        className="h-10.5 border-slate-800 bg-slate-950/60 text-sm text-slate-100 placeholder-slate-600 rounded-xl focus-visible:ring-1 focus-visible:ring-[#0B7A3B] focus-visible:border-[#0B7A3B] transition-all"
+                        className="h-10.5 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/60 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-650 rounded-xl focus-visible:ring-1 focus-visible:ring-[#0B7A3B] focus-visible:border-[#0B7A3B] transition-all"
                         disabled={loading}
                       />
                     </div>
@@ -373,7 +371,7 @@ export default function ConnectGovernmentPage() {
                   {/* Password Input Field */}
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <Label htmlFor="password" className="text-xs font-bold text-slate-300">
+                      <Label htmlFor="password" className="text-xs font-bold text-slate-700 dark:text-slate-300">
                         Integratsiya paroli
                       </Label>
                     </div>
@@ -383,13 +381,13 @@ export default function ConnectGovernmentPage() {
                         type={showPassword ? "text" : "password"}
                         placeholder="••••••••"
                         {...register("password")}
-                        className="h-10.5 border-slate-800 bg-slate-950/60 text-sm text-slate-100 placeholder-slate-600 pr-11 rounded-xl focus-visible:ring-1 focus-visible:ring-[#0B7A3B] focus-visible:border-[#0B7A3B] transition-all"
+                        className="h-10.5 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/60 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-650 pr-11 rounded-xl focus-visible:ring-1 focus-visible:ring-[#0B7A3B] focus-visible:border-[#0B7A3B] transition-all"
                         disabled={loading}
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3.5 top-3 text-slate-500 hover:text-slate-300 transition-colors"
+                        className="absolute right-3.5 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
                         disabled={loading}
                       >
                         {showPassword ? (
@@ -410,7 +408,7 @@ export default function ConnectGovernmentPage() {
                   <Button
                     type="submit"
                     disabled={loading}
-                    className="w-full h-11 bg-gradient-to-r from-[#0B7A3B] to-[#0d9246] hover:from-[#096631] hover:to-[#0B7A3B] text-white font-bold text-sm shadow-md mt-4 rounded-xl border border-[#4ade80]/15 transition-all duration-200"
+                    className="w-full h-11 bg-[#0B7A3B] hover:bg-[#096631] text-white font-bold text-sm shadow-md mt-4 rounded-xl transition-all duration-200 border-none"
                   >
                     {loading ? (
                       <div className="flex items-center gap-2 justify-center">
@@ -423,13 +421,13 @@ export default function ConnectGovernmentPage() {
                   </Button>
                 </form>
               </CardContent>
-              <CardFooter className="flex flex-col items-center border-t border-slate-800/80 p-4 bg-slate-950/20 text-center gap-2">
-                <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-bold">
-                  <ShieldCheck className="h-4 w-4 text-[#4ade80]" />
+              <CardFooter className="flex flex-col items-center border-t border-slate-100 dark:border-slate-850 p-4 bg-slate-50/50 dark:bg-slate-950/20 text-center gap-2">
+                <div className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400 font-bold">
+                  <ShieldCheck className="h-4 w-4 text-[#0B7A3B] dark:text-[#4ade80]" />
                   Uchidan-uchiga shifrlangan xavfsiz ulanish
                 </div>
-                <div className="flex gap-1.5 text-[9px] text-slate-500 px-4 leading-normal">
-                  <Info className="h-3.5 w-3.5 mt-0.5 shrink-0 text-slate-600" />
+                <div className="flex gap-1.5 text-[9px] text-slate-400 dark:text-slate-500 px-4 leading-normal">
+                  <Info className="h-3.5 w-3.5 mt-0.5 shrink-0 text-slate-400" />
                   Hisobot ma'lumotlari AES-256 shifrlash kaliti yordamida himoyalangan holda saqlanadi.
                 </div>
               </CardFooter>
@@ -439,10 +437,10 @@ export default function ConnectGovernmentPage() {
           {/* Separator */}
           <div className="relative py-2">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-800/80" />
+              <div className="w-full border-t border-slate-200 dark:border-slate-800" />
             </div>
             <div className="relative flex justify-center text-[10px] uppercase">
-              <span className="bg-[#080b11] px-4 text-slate-500 font-bold tracking-wider">
+              <span className="bg-slate-50 dark:bg-[#080b11] px-4 text-slate-450 dark:text-slate-500 font-bold tracking-wider">
                 yoki sinab ko'ring
               </span>
             </div>
@@ -453,14 +451,14 @@ export default function ConnectGovernmentPage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="rounded-2xl border border-dashed border-[#0B7A3B]/40 bg-[#0B7A3B]/5 p-5 text-center space-y-4"
+            className="rounded-2xl border border-dashed border-[#0B7A3B]/30 bg-emerald-50/30 dark:bg-[#0B7A3B]/5 p-5 text-center space-y-4"
           >
             <div className="space-y-1">
-              <div className="inline-flex items-center gap-1.5 text-xs font-black text-[#4ade80] uppercase tracking-wider bg-[#0B7A3B]/10 px-2.5 py-0.5 rounded-full border border-[#0B7A3B]/20">
+              <div className="inline-flex items-center gap-1.5 text-xs font-black text-[#0B7A3B] dark:text-[#4ade80] uppercase tracking-wider bg-emerald-50 dark:bg-[#0B7A3B]/10 px-2.5 py-0.5 rounded-full border border-emerald-100 dark:border-[#0B7A3B]/20">
                 <span>🎯</span>
                 <span>Demo Hisob</span>
               </div>
-              <p className="text-[11px] text-slate-400 leading-normal">
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">
                 Hukumat integratsiyasi bo'lmasa, tayyor mock ma'lumotlar bilan tizimni tahlil qiling.
               </p>
             </div>
@@ -468,7 +466,7 @@ export default function ConnectGovernmentPage() {
               type="button"
               onClick={handleDemoLogin}
               disabled={loading}
-              className="w-full h-11 flex items-center justify-center gap-2 rounded-xl border border-[#0B7A3B]/30 bg-slate-900/60 hover:bg-[#0B7A3B]/10 text-[#4ade80] hover:text-white text-sm font-bold transition-all duration-300 disabled:opacity-50 shadow-sm"
+              className="w-full h-11 flex items-center justify-center gap-2 rounded-xl border border-[#0B7A3B]/30 bg-white dark:bg-slate-900/60 hover:bg-emerald-50/30 dark:hover:bg-[#0B7A3B]/10 text-[#0B7A3B] dark:text-[#4ade80] text-sm font-bold transition-all duration-300 disabled:opacity-50 shadow-sm"
             >
               {loading ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -479,7 +477,7 @@ export default function ConnectGovernmentPage() {
                 </>
               )}
             </button>
-            <p className="text-[9px] text-slate-500">
+            <p className="text-[9px] text-slate-400 dark:text-slate-500">
               Demo rejimda ma'lumotlar faqat o'rganish uchun xizmat qiladi.
             </p>
           </motion.div>
