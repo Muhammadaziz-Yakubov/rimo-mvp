@@ -465,4 +465,106 @@ Do not include any conversational text or markdown json blocks.`;
       };
     }
   }
+
+  // Parse unstructured Uzbek text into a list of transaction objects
+  async parseTransactionsFromText(text: string, defaultType: "income" | "expense"): Promise<any[]> {
+    const todayStr = new Date().toISOString().split("T")[0];
+    
+    if (!this.isConfigured()) {
+      // Mock parsing for dev/testing if Groq API key is missing
+      const txs: any[] = [];
+      const amountRegex = /(\d+(?:\.\d+)?)\s*(ming|mln|million|mlrd|milliard)?\s*(?:so'm|som|sum|uzs)?/gi;
+      let match;
+      while ((match = amountRegex.exec(text)) !== null) {
+        let val = parseFloat(match[1]);
+        const unit = match[2]?.toLowerCase();
+        if (unit === "ming") val *= 1000;
+        else if (unit === "mln" || unit === "million") val *= 1000000;
+        else if (unit === "mlrd" || unit === "milliard") val *= 1000000000;
+        
+        txs.push({
+          description: text.substring(Math.max(0, match.index - 35), match.index).trim() || (defaultType === "income" ? "Kirim" : "Xarajat"),
+          amount: val,
+          type: defaultType,
+          category: defaultType === "income" ? "Sales" : "General Expense",
+          taxCategory: defaultType === "income" ? "turnover_taxable" : "exempt",
+          date: todayStr,
+          confidenceScore: 80,
+        });
+      }
+      return txs.length > 0 ? txs : [
+        {
+          description: text.substring(0, 50),
+          amount: 100000,
+          type: defaultType,
+          category: defaultType === "income" ? "Sales" : "General Expense",
+          taxCategory: defaultType === "income" ? "turnover_taxable" : "exempt",
+          date: todayStr,
+          confidenceScore: 70,
+        }
+      ];
+    }
+
+    const systemPrompt = `You are a premium AI Uzbek business accountant.
+Parse the following unstructured text containing financial transaction details for a company.
+Current Date: ${todayStr} (Sunday).
+Selected default transaction type: ${defaultType} (income or expense).
+
+Extract all individual transactions mentioned in the text. For each transaction, determine:
+1. "description": A clear, short description in Uzbek (e.g., "Ofis xarajatlari", "QQS to'lovi", "Mahsulot sotish").
+2. "amount": The numeric amount in UZS. Parse numbers and multiplier words like 'ming' (1,000), 'mln' / 'million' (1,000,000), 'mlrd' / 'milliard' (1,000,000,000), 'som' / 'so'm'. E.g., '100 ming som' -> 100000, '1.5 mln' -> 1500000, '200 mln' -> 200000000.
+3. "type": The transaction type ('income' or 'expense'). By default, use the selected default transaction type (${defaultType}), but if the text explicitly indicates the opposite for a specific item, use that.
+4. "category": a user-friendly category (e.g., "Sales", "Rent", "Office Supplies", "Salaries", "Utilities", "Tax Payments", "Marketing", "Consulting", "Software", "Equipment", "Logistics", "Raw Materials").
+5. "taxCategory": one of the following strict strings:
+   - "turnover_taxable" (for all revenue/income)
+   - "vat_deductible" (for normal business expenses that are deductible)
+   - "non_deductible_expense" (for personal expenses, fines, or expenses without proper invoices)
+   - "exempt" (for neutral transfers, bank fees, or non-taxable income)
+6. "date": The date of the transaction as "YYYY-MM-DD". Relative words like 'bugun' (today) mean ${todayStr}. 'kecha' (yesterday) means the day before. 'o'tgan dushanba' should be calculated relative to ${todayStr}. If no date is mentioned, use ${todayStr}.
+7. "confidenceScore": an integer between 0 and 100 representing your confidence score.
+
+Return ONLY a valid JSON array of objects. No conversational text. Do not wrap in markdown \`\`\`json blocks.`;
+
+    try {
+      const response = await axios.post(
+        this.apiUrl,
+        {
+          model: this.model,
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: text },
+          ],
+          temperature: 0.1,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.apiKey}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      let content = response.data?.choices?.[0]?.message?.content;
+      if (!content) throw new Error("Empty response from GROQ API");
+
+      content = content.replace(/```json\s*/i, "").replace(/```\s*$/, "").trim();
+      const parsed = JSON.parse(content);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error: any) {
+      console.error("GROQ parseTransactionsFromText Error:", error.message);
+      // Fallback in case of API error or invalid JSON
+      return [
+        {
+          description: text.substring(0, 50),
+          amount: 100000,
+          type: defaultType,
+          category: defaultType === "income" ? "Sales" : "General Expense",
+          taxCategory: defaultType === "income" ? "turnover_taxable" : "exempt",
+          date: todayStr,
+          confidenceScore: 70,
+        }
+      ];
+    }
+  }
 }
+

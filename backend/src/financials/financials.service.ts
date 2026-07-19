@@ -607,4 +607,71 @@ export class FinancialsService implements OnModuleInit {
     const aiResponse = await this.groqService.chat(query, stats, transactions, chatHistory);
     return { response: aiResponse };
   }
+
+  // Parse unstructured text into transactions and save them
+  async addTransactionsViaAi(
+    workspaceId: string,
+    text: string,
+    type: "income" | "expense"
+  ): Promise<any> {
+    // 1. Ask GROQ to parse the text
+    const parsed = await this.groqService.parseTransactionsFromText(text, type);
+    if (!parsed || parsed.length === 0) {
+      throw new BadRequestException("Matndan tranzaksiyalarni aniqlab bo'lmadi. Iltimos, xizmat nomi va summasini aniqroq yozing.");
+    }
+
+    // 2. Prepare transaction documents
+    const transactionsToSave = parsed.map((item: any) => {
+      const parsedDate = item.date ? new Date(item.date) : new Date();
+      // Ensure date is valid, fallback to now
+      const date = isNaN(parsedDate.getTime()) ? new Date() : parsedDate;
+      const itemType = item.type === "income" || item.type === "expense" ? item.type : type;
+
+      return {
+        workspaceId: new Types.ObjectId(workspaceId),
+        date,
+        description: item.description || (itemType === "income" ? "Kirim tranzaksiyasi" : "Chiqim tranzaksiyasi"),
+        originalDescription: text,
+        amount: item.amount || 0,
+        type: itemType,
+        category: item.category || (itemType === "income" ? "Sales" : "General Expense"),
+        taxCategory: item.taxCategory || (itemType === "income" ? "turnover_taxable" : "exempt"),
+        confidenceScore: item.confidenceScore || 90,
+        rawData: { aiParsedText: text, ...item }
+      };
+    });
+
+    // 3. Insert into database
+    const savedDocs = await this.transactionModel.insertMany(transactionsToSave);
+
+    // 4. Regenerate and save AI Insights
+    try {
+      const stats = await this.getStats(workspaceId);
+      const allTransactions = await this.transactionModel
+        .find({ workspaceId: new Types.ObjectId(workspaceId) })
+        .sort({ date: -1 })
+        .exec();
+      const insights = await this.groqService.generateInsights(stats, allTransactions);
+      
+      await this.financialInsightModel.deleteMany({ workspaceId: new Types.ObjectId(workspaceId) }).exec();
+      if (insights.length > 0) {
+        const insightsToSave = insights.map((ins: any) => ({
+          workspaceId: new Types.ObjectId(workspaceId),
+          type: ins.type || "info",
+          title: ins.title || "Tahlil",
+          description: ins.description || "",
+          priority: ins.priority || "medium",
+        }));
+        await this.financialInsightModel.insertMany(insightsToSave);
+      }
+    } catch (insErr) {
+      console.error("Failed to generate or save insights during AI addition:", insErr.message);
+    }
+
+    return {
+      success: true,
+      count: savedDocs.length,
+      transactions: savedDocs,
+    };
+  }
 }

@@ -295,3 +295,19 @@ export function useSubmitAiReport() {
     },
   });
 }
+
+// 22. Add transactions via AI manual input
+export function useAddAiTransactions() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (payload: { text: string; type: "income" | "expense" }) => {
+      const { data } = await apiClient.post("/financials/transactions/ai-add", payload);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["financialStats"] });
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["analytics"] });
+    },
+  });
+}

@@ -12,12 +12,26 @@ import {
   ChevronRight,
   Download,
   Coins,
+  Plus,
+  Sparkles,
+  ArrowUpRight,
+  ArrowDownRight,
+  Loader2,
 } from "lucide-react";
-import { useTransactions } from "@/hooks/use-api";
+import { useTransactions, useAddAiTransactions } from "@/hooks/use-api";
 import { useLanguageStore } from "@/store/language.store";
 import { t } from "@/locales/t";
 import { motion } from "framer-motion";
 import { toast } from "react-hot-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
 
 // Helper for formatting currencies
 const formatUzs = (amount: number) => {
@@ -114,6 +128,35 @@ export default function TransactionsPage() {
   const [page, setPage] = useState(1);
   const [limit] = useState(15);
   const [dateRange, setDateRange] = useState("all");
+
+  // AI Ingestion states
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [aiText, setAiText] = useState("");
+  const [aiType, setAiType] = useState<"income" | "expense">("expense");
+  const addAiTransactionsMutation = useAddAiTransactions();
+
+  const handleAiSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!aiText.trim()) {
+      toast.error(lang === "en" ? "Please enter transaction details." : "Iltimos, tranzaksiya tafsilotlarini yozing.");
+      return;
+    }
+
+    try {
+      const result = await addAiTransactionsMutation.mutateAsync({
+        text: aiText,
+        type: aiType,
+      });
+
+      const successMsg = t("transactions.successMessage", { count: result.count?.toString() || "1" });
+      toast.success(successMsg);
+      setAiText("");
+      setIsModalOpen(false);
+    } catch (error: any) {
+      const errMsg = error.response?.data?.message || error.message || "Xatolik yuz berdi";
+      toast.error(errMsg);
+    }
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -237,6 +280,123 @@ export default function TransactionsPage() {
               <Download className="h-4 w-4" />
               <span>{t("transactions.exportBtn")}</span>
             </Button>
+
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+              <DialogTrigger asChild>
+                <Button
+                  className="h-9 bg-violet-600 hover:bg-violet-750 text-white text-xs font-bold rounded-lg shadow-sm gap-2 cursor-pointer transition-all border border-violet-500/20"
+                >
+                  <Plus className="h-4 w-4" />
+                  <span>{t("transactions.addBtn")}</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800/80 p-6 rounded-xl shadow-lg">
+                <DialogHeader className="space-y-1.5 pb-2">
+                  <DialogTitle className="text-lg font-bold text-slate-900 dark:text-slate-50 flex items-center gap-2">
+                    <Sparkles className="h-5 w-5 text-violet-500 fill-violet-500/10 animate-pulse" />
+                    <span>{t("transactions.modalTitle")}</span>
+                  </DialogTitle>
+                  <DialogDescription className="text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                    {t("transactions.modalDesc")}
+                  </DialogDescription>
+                </DialogHeader>
+
+                <form onSubmit={handleAiSubmit} className="space-y-4 pt-1">
+                  {/* Transaction Type selection */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-350">
+                      {t("transactions.selectType")}:
+                    </label>
+                    <div className="grid grid-cols-2 gap-3">
+                      {/* Income Card */}
+                      <button
+                        type="button"
+                        onClick={() => setAiType("income")}
+                        className={`flex items-center justify-between p-3 rounded-lg border text-left cursor-pointer transition-all ${
+                          aiType === "income"
+                            ? "bg-emerald-500/5 dark:bg-emerald-500/10 border-emerald-500 shadow-sm"
+                            : "bg-transparent border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700"
+                        }`}
+                      >
+                        <div className="flex flex-col">
+                          <span className={`text-xs font-bold ${aiType === "income" ? "text-emerald-600 dark:text-emerald-400" : "text-slate-700 dark:text-slate-300"}`}>
+                            {t("transactions.income")}
+                          </span>
+                        </div>
+                        <ArrowUpRight className={`h-4 w-4 ${aiType === "income" ? "text-emerald-500" : "text-slate-400"}`} />
+                      </button>
+
+                      {/* Expense Card */}
+                      <button
+                        type="button"
+                        onClick={() => setAiType("expense")}
+                        className={`flex items-center justify-between p-3 rounded-lg border text-left cursor-pointer transition-all ${
+                          aiType === "expense"
+                            ? "bg-rose-500/5 dark:bg-rose-500/10 border-rose-500 shadow-sm"
+                            : "bg-transparent border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700"
+                        }`}
+                      >
+                        <div className="flex flex-col">
+                          <span className={`text-xs font-bold ${aiType === "expense" ? "text-rose-600 dark:text-rose-400" : "text-slate-700 dark:text-slate-300"}`}>
+                            {t("transactions.expense")}
+                          </span>
+                        </div>
+                        <ArrowDownRight className={`h-4 w-4 ${aiType === "expense" ? "text-rose-500" : "text-slate-400"}`} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Long text description input */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-350">
+                      {t("transactions.descriptionLabel")}:
+                    </label>
+                    <Textarea
+                      required
+                      value={aiText}
+                      onChange={(e) => setAiText(e.target.value)}
+                      placeholder={
+                        aiType === "income"
+                          ? t("transactions.placeholderIncome")
+                          : t("transactions.placeholderExpense")
+                      }
+                      rows={5}
+                      className="resize-none text-xs leading-relaxed border-slate-200 dark:border-slate-800 focus:border-violet-500 dark:focus:border-violet-500"
+                    />
+                  </div>
+
+                  {/* Footer buttons */}
+                  <div className="flex justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 -mx-6 -mb-6 p-4 bg-slate-50/50 dark:bg-slate-900/30 rounded-b-xl">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setIsModalOpen(false)}
+                      disabled={addAiTransactionsMutation.isPending}
+                      className="h-9 text-xs font-bold border-slate-200 dark:border-slate-800 cursor-pointer text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-950 hover:bg-slate-50 dark:hover:bg-slate-900"
+                    >
+                      {lang === "en" ? "Cancel" : "Bekor qilish"}
+                    </Button>
+                    <Button
+                      type="submit"
+                      disabled={addAiTransactionsMutation.isPending}
+                      className="h-9 bg-violet-600 hover:bg-violet-750 text-white text-xs font-bold rounded-lg shadow-sm gap-2 cursor-pointer transition-all border border-violet-500/20"
+                    >
+                      {addAiTransactionsMutation.isPending ? (
+                        <>
+                          <Loader2 className="h-3 w-3 animate-spin" />
+                          <span>{t("transactions.parsing")}</span>
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="h-3.5 w-3.5" />
+                          <span>{t("transactions.addBtn")}</span>
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </form>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
 

@@ -11,6 +11,7 @@ import {
   Query,
   HttpCode,
   HttpStatus,
+  BadRequestException,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { FinancialsService } from "./financials.service";
@@ -91,5 +92,21 @@ export class FinancialsController {
       throw new Error("Savol matni kiritilmadi.");
     }
     return this.financialsService.chatWithAi(req.workspaceId, body.query, body.history || []);
+  }
+
+  // Add transactions via unstructured Uzbek text analysis
+  @Post("transactions/ai-add")
+  @HttpCode(HttpStatus.CREATED)
+  async addTransactionsViaAi(
+    @Req() req: any,
+    @Body() body: { text: string; type: "income" | "expense" }
+  ) {
+    if (!body.text) {
+      throw new BadRequestException("Matn kiritilmadi.");
+    }
+    if (!body.type || !["income", "expense"].includes(body.type)) {
+      throw new BadRequestException("Tranzaksiya turi noto'g'ri tanlangan.");
+    }
+    return this.financialsService.addTransactionsViaAi(req.workspaceId, body.text, body.type);
   }
 }
