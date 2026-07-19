@@ -115,8 +115,8 @@ export function Sidebar() {
       {/* Logo */}
       <div className="flex items-center justify-between h-[64px] px-5 border-b border-[#e5e7eb] dark:border-[#1e293b]">
         <Link href="/dashboard" className="flex items-center gap-2.5 min-w-0">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-slate-950 dark:bg-white text-white dark:text-slate-950 shadow-sm">
-            <Sparkles className="h-4.5 w-4.5" />
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-transparent overflow-hidden shadow-sm">
+            <img src="/rimo.png" alt="Rimo Logo" className="h-full w-full object-cover" />
           </div>
           <AnimatePresence mode="wait">
             {!isCollapsed && (

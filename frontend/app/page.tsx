@@ -16,8 +16,8 @@ export default function Home() {
       <div className="flex flex-col items-center gap-4">
         {/* Animated Brand Pulse */}
         <div className="relative flex items-center justify-center">
-          <div className="h-16 w-16 rounded-2xl bg-zinc-900 dark:bg-white flex items-center justify-center text-white dark:text-black font-extrabold text-2xl shadow-md">
-            R
+          <div className="h-16 w-16 rounded-2xl bg-transparent flex items-center justify-center overflow-hidden shadow-md">
+            <img src="/rimo.png" alt="Rimo Logo" className="h-full w-full object-cover" />
           </div>
           {/* Concentric loading rings */}
           <div className="absolute -inset-4 rounded-[28px] border border-zinc-200 dark:border-zinc-800 animate-ping opacity-20 pointer-events-none" />

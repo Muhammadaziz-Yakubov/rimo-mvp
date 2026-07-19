@@ -162,8 +162,8 @@ export default function ConnectGovernmentPage() {
       {/* Top Header - Apple / Airbnb style minimal navigation */}
       <header className="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between z-10">
         <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-zinc-900 dark:bg-white flex items-center justify-center text-white dark:text-black font-extrabold text-lg shadow-sm">
-            R
+          <div className="h-8 w-8 rounded-lg bg-transparent flex items-center justify-center overflow-hidden shadow-sm">
+            <img src="/rimo.png" alt="Rimo Logo" className="h-full w-full object-cover" />
           </div>
           <span className="text-base font-extrabold tracking-tight text-zinc-900 dark:text-white">
             Rimo

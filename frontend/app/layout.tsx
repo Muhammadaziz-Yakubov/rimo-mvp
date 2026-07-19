@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Rimo — Financial Operating System",
   description: "Avtomatlashtirilgan soliq hisobotlari loyihalari va ularning yuborilish holatlari.",
+  icons: {
+    icon: "/rimo.png",
+  },
 };
 
 export default function RootLayout({
