@@ -115,8 +115,8 @@ export function Sidebar() {
       {/* Logo */}
       <div className="flex items-center justify-between h-[64px] px-5 border-b border-[#e5e7eb] dark:border-[#1e293b]">
         <Link href="/dashboard" className="flex items-center gap-2.5 min-w-0">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-transparent overflow-hidden shadow-sm">
-            <img src="/rimo.png" alt="Rimo Logo" className="h-full w-full object-cover" />
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 overflow-hidden shadow-sm p-0.5">
+            <img src="/rimo.png" alt="Rimo Logo" className="h-full w-full object-contain rounded-[6px]" />
           </div>
           <AnimatePresence mode="wait">
             {!isCollapsed && (
@@ -129,8 +129,8 @@ export function Sidebar() {
                 <span className="font-bold text-[#0f172a] dark:text-[#f8fafc] tracking-tight text-[13px] leading-tight">
                   Rimo
                 </span>
-                <span className="text-[9px] text-[#64748b] font-bold tracking-wider uppercase leading-tight">
-                  Financial OS
+                <span className="text-[9px] text-[#64748b] font-semibold tracking-wide leading-tight">
+                  AI Moliyaviy Yordamchi
                 </span>
               </motion.div>
             )}
