@@ -326,7 +326,7 @@ export default function RimoAiPage() {
                   </Badge>
                 </h3>
                 <span className="text-[10px] text-slate-400 font-semibold mt-0.5">
-                  Llama 3.3 Financial Director Agent • Faol
+                  InFast AI Assistant
                 </span>
               </div>
             </div>
