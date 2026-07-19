@@ -282,14 +282,16 @@ export default function TransactionsPage() {
             </Button>
 
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-              <DialogTrigger asChild>
-                <Button
-                  className="h-9 bg-violet-600 hover:bg-violet-750 text-white text-xs font-bold rounded-lg shadow-sm gap-2 cursor-pointer transition-all border border-violet-500/20"
-                >
-                  <Plus className="h-4 w-4" />
-                  <span>{t("transactions.addBtn")}</span>
-                </Button>
-              </DialogTrigger>
+              <DialogTrigger
+                render={
+                  <Button
+                    className="h-9 bg-violet-600 hover:bg-violet-750 text-white text-xs font-bold rounded-lg shadow-sm gap-2 cursor-pointer transition-all border border-violet-500/20"
+                  >
+                    <Plus className="h-4 w-4" />
+                    <span>{t("transactions.addBtn")}</span>
+                  </Button>
+                }
+              />
               <DialogContent className="sm:max-w-md bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800/80 p-6 rounded-xl shadow-lg">
                 <DialogHeader className="space-y-1.5 pb-2">
                   <DialogTitle className="text-lg font-bold text-slate-900 dark:text-slate-50 flex items-center gap-2">
