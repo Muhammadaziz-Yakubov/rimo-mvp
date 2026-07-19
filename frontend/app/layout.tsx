@@ -17,7 +17,11 @@ export const metadata: Metadata = {
   title: "Rimo — AI Moliyaviy Yordamchi",
   description: "Avtomatlashtirilgan soliq hisobotlari loyihalari va ularning yuborilish holatlari.",
   icons: {
-    icon: "/rimo.png",
+    icon: [
+      { url: "/rimo.png", type: "image/png" },
+    ],
+    shortcut: "/rimo.png",
+    apple: "/rimo.png",
   },
 };
 
@@ -33,6 +37,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <link rel="icon" type="image/png" href="/rimo.png" />
+        <link rel="shortcut icon" href="/rimo.png" />
+        <link rel="apple-touch-icon" href="/rimo.png" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
